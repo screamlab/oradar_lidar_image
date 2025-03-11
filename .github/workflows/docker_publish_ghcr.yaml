@@ -115,16 +115,17 @@ jobs:
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.REGISTRY }}
+      - name: Log in to GitHub Container Registry
         if: github.event_name != 'pull_request'
         # Choose one method
         # 1. Use login-action
         uses: docker/login-action@v3
         with:
+          registry: ghcr.io
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
+          username: alianlbj23
           # password: ${{ secrets.GITHUB_TOKEN }}  # You can use the default GitHub token
-          password: ${{ secrets.DOCKER_PAT }}  # Or you can use your pre-generated Personal Access Token
+          password: ${{ secrets.GHCR_PAT }} # Or you can use your pre-generated Personal Access Token
         # 2. Use command line
         # run: |
         #   docker login ${{ env.REGISTRY }} --username ${{ github.actor }} --password ${{ secrets.DOCKER_PAT }}
